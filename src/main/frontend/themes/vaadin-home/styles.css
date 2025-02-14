@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+@import url('./views/home-view.css');
 
 html {
   --lumo-base-color: black;
@@ -9,5 +10,3 @@ html {
   --lumo-tertiary-text-color: whitesmoke;
   --lumo-font-family: "JetBrains Mono";
 }
-
-@import url('./views/home-view.css');
