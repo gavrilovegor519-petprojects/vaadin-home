@@ -24,7 +24,7 @@ public class HomeView extends Composite<VerticalLayout> {
 
     public HomeView() {
         getContent().setWidthFull();
-        getContent().setHeightFull();
+        getContent().setMinHeight("100vh");
         getContent().setJustifyContentMode(JustifyContentMode.CENTER);
         getContent().setAlignItems(Alignment.CENTER);
 
