@@ -1,6 +1,7 @@
 package ru.gavrilovegor519.vaadinhome.views.home;
 
 import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
@@ -22,21 +23,25 @@ public class HomeView extends Composite<VerticalLayout> {
     private final UnorderedList textItems2 = new UnorderedList();
 
     public HomeView() {
-        getContent().setWidth("100%");
-        getContent().setHeight("100%");
-        getContent().getStyle().set("flex-grow", "1");
+        getContent().setWidthFull();
+        getContent().setHeightFull();
         getContent().setJustifyContentMode(JustifyContentMode.CENTER);
         getContent().setAlignItems(Alignment.CENTER);
+
         VerticalLayout content = new VerticalLayout();
         content.setMaxWidth("800px");
-        content.setJustifyContentMode(JustifyContentMode.CENTER);
-        content.setAlignItems(Alignment.START);
+        content.setAlignItems(Alignment.CENTER);
+
+        VerticalLayout content2 = new VerticalLayout();
+
         setName();
         setProfession();
         setSkillsPartSettings();
         setLinksPartSettings();
-        content.add(h3, textItems, h32, textItems2);
-        getContent().add(h1, h2, content);
+
+        content2.add(h3, textItems, h32, textItems2);
+        content.add(h1, h2, content2);
+        getContent().add(content);
     }
 
     private void setName() {
@@ -69,21 +74,21 @@ public class HomeView extends Composite<VerticalLayout> {
 
     private void setSkillsPartSettings() {
         h3.setText("Мой стек:");
-        h3.setWidth("max-content");
-        textItems.setWidth("max-content");
 
         for (String skill : getSkills()) {
-            textItems.add(new ListItem(skill));
+            ListItem item = new ListItem(skill);
+            item.setWhiteSpace(HasText.WhiteSpace.PRE_WRAP);
+            textItems.add(item);
         }
     }
 
     private void setLinksPartSettings() {
         h32.setText("Ссылки:");
-        h32.setWidth("max-content");
-        textItems2.setWidth("max-content");
 
         for (Anchor link : getLinks()) {
-            textItems2.add(new ListItem(link));
+            ListItem item = new ListItem(link);
+            item.setWhiteSpace(HasText.WhiteSpace.PRE_WRAP);
+            textItems2.add(item);
         }
     }
 }
