@@ -1,1 +1,11 @@
+html {
+  --lumo-base-color: black;
+  --lumo-header-text-color: whitesmoke;
+  --lumo-body-text-color: whitesmoke;
+  --lumo-primary-text-color: whitesmoke;
+  --lumo-secondary-text-color: whitesmoke;
+  --lumo-tertiary-text-color: whitesmoke;
+  --lumo-font-family: "JetBrains Mono";
+}
+
 @import url('./views/home-view.css');

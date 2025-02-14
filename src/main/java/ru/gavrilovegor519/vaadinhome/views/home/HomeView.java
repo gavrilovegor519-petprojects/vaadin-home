@@ -1,64 +1,89 @@
 package ru.gavrilovegor519.vaadinhome.views.home;
 
 import com.vaadin.flow.component.Composite;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.listbox.MultiSelectListBox;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@PageTitle("Home")
+@PageTitle("Егор Гаврилов - хоумпейдж")
 @Route("")
 public class HomeView extends Composite<VerticalLayout> {
+    private final H1 h1 = new H1();
+    private final H2 h2 = new H2();
+    private final H3 h3 = new H3();
+    private final UnorderedList textItems = new UnorderedList();
+    private final H3 h32 = new H3();
+    private final UnorderedList textItems2 = new UnorderedList();
 
     public HomeView() {
-        H1 h1 = new H1();
-        H2 h2 = new H2();
-        H3 h3 = new H3();
-        MultiSelectListBox textItems = new MultiSelectListBox();
-        H3 h32 = new H3();
-        MultiSelectListBox textItems2 = new MultiSelectListBox();
         getContent().setWidth("100%");
+        getContent().setHeight("100%");
         getContent().getStyle().set("flex-grow", "1");
         getContent().setJustifyContentMode(JustifyContentMode.CENTER);
         getContent().setAlignItems(Alignment.CENTER);
+        VerticalLayout content = new VerticalLayout();
+        content.setMaxWidth("800px");
+        content.setJustifyContentMode(JustifyContentMode.CENTER);
+        content.setAlignItems(Alignment.START);
+        setName();
+        setProfession();
+        setSkillsPartSettings();
+        setLinksPartSettings();
+        content.add(h3, textItems, h32, textItems2);
+        getContent().add(h1, h2, content);
+    }
+
+    private void setName() {
         h1.setText("Егор Гаврилов");
         h1.setWidth("max-content");
-        h2.setText("Java-разработчик");
+    }
+
+    private void setProfession() {
+        h2.setText("Java Developer");
         h2.setWidth("max-content");
+    }
+
+    private List<String> getSkills() {
+        List<String> skills = new ArrayList<>();
+        skills.add("Java 17");
+        skills.add("Spring 5/6 (Web, Data JPA, Security)");
+        skills.add("JPA, SQL");
+        skills.add("Linux, Docker");
+        return skills;
+    }
+
+    private List<Anchor> getLinks() {
+        List<Anchor> links = new ArrayList<>();
+        links.add(new Anchor("https://github.com/gavrilovegor519", "GitHub"));
+        links.add(new Anchor("https://www.youtube.com/@gavrilovegor519", "YouTube"));
+        links.add(new Anchor("https://habr.com/ru/users/gavrilovegor519/", "Habr"));
+        links.add(new Anchor("https://t.me/gavrilovegor519", "Telegram"));
+        return links;
+    }
+
+    private void setSkillsPartSettings() {
         h3.setText("Мой стек:");
         h3.setWidth("max-content");
-        textItems.setWidth("min-content");
-        setMultiSelectListBoxSampleData(textItems);
+        textItems.setWidth("max-content");
+
+        for (String skill : getSkills()) {
+            textItems.add(new ListItem(skill));
+        }
+    }
+
+    private void setLinksPartSettings() {
         h32.setText("Ссылки:");
         h32.setWidth("max-content");
-        textItems2.setWidth("min-content");
-        setMultiSelectListBoxSampleData(textItems2);
-        getContent().add(h1);
-        getContent().add(h2);
-        getContent().add(h3);
-        getContent().add(textItems);
-        getContent().add(h32);
-        getContent().add(textItems2);
-    }
+        textItems2.setWidth("max-content");
 
-    record SampleItem(String value, String label, Boolean disabled) {
-    }
-
-    private void setMultiSelectListBoxSampleData(MultiSelectListBox multiSelectListBox) {
-        List<SampleItem> sampleItems = new ArrayList<>();
-        sampleItems.add(new SampleItem("first", "First", null));
-        sampleItems.add(new SampleItem("second", "Second", null));
-        sampleItems.add(new SampleItem("third", "Third", Boolean.TRUE));
-        sampleItems.add(new SampleItem("fourth", "Fourth", null));
-        multiSelectListBox.setItems(sampleItems);
-        multiSelectListBox.setItemLabelGenerator(item -> ((SampleItem) item).label());
-        multiSelectListBox.setItemEnabledProvider(item -> !Boolean.TRUE.equals(((SampleItem) item).disabled()));
+        for (Anchor link : getLinks()) {
+            textItems2.add(new ListItem(link));
+        }
     }
 }
