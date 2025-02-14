@@ -39,7 +39,9 @@ public class HomeView extends Composite<VerticalLayout> {
         setSkillsPartSettings();
         setLinksPartSettings();
 
-        content2.add(h3, textItems, h32, textItems2);
+        Paragraph p = new Paragraph("Также я являюсь самым молодым сисопом в Фидонете на сегодняшний день - 2:5015/519.");
+
+        content2.add(h3, textItems, h32, textItems2, p);
         content.add(h1, h2, content2);
         getContent().add(content);
     }
