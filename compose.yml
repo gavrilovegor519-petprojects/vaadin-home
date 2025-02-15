@@ -1,8 +1,6 @@
 services:
   app:
-    image: 'gavrilovegor519/vaadin-home:latest'
-    build:
-      context: .
+    image: 'gavrilovegor519/vaadin-home'
     ports:
       - "80:8080"
     networks:
