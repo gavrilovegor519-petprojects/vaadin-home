@@ -15,45 +15,37 @@ import java.util.List;
 @PageTitle("Егор Гаврилов - хоумпейдж")
 @Route("")
 public class HomeView extends Composite<VerticalLayout> {
-    private final H1 h1 = new H1();
-    private final H2 h2 = new H2();
-    private final H3 h3 = new H3();
-    private final UnorderedList textItems = new UnorderedList();
-    private final H3 h32 = new H3();
-    private final UnorderedList textItems2 = new UnorderedList();
+    private final H1 myName = new H1();
+    private final H2 profession = new H2();
+    private final H3 skillsPartHeading = new H3();
+    private final UnorderedList skills = new UnorderedList();
+    private final H3 linksPartHeading = new H3();
+    private final UnorderedList links = new UnorderedList();
+
+    private final Paragraph fidoNetPart = new Paragraph("""
+                                                   Также я являюсь самым молодым сисопом в
+                                                   Фидонете на сегодняшний день - 2:5015/519.
+                                                   """);
+
+    private final VerticalLayout content = new VerticalLayout();
+    private final VerticalLayout content2 = new VerticalLayout();
 
     public HomeView() {
-        getContent().setWidthFull();
-        getContent().setMinHeight("100vh");
-        getContent().setJustifyContentMode(JustifyContentMode.CENTER);
-        getContent().setAlignItems(Alignment.CENTER);
-
-        VerticalLayout content = new VerticalLayout();
-        content.setMaxWidth("800px");
-        content.setAlignItems(Alignment.CENTER);
-
-        VerticalLayout content2 = new VerticalLayout();
-
         setName();
         setProfession();
         setSkillsPartSettings();
         setLinksPartSettings();
-
-        Paragraph p = new Paragraph("Также я являюсь самым молодым сисопом в Фидонете на сегодняшний день - 2:5015/519.");
-
-        content2.add(h3, textItems, h32, textItems2, p);
-        content.add(h1, h2, content2);
-        getContent().add(content);
+        setupLayout();
     }
 
     private void setName() {
-        h1.setText("Егор Гаврилов");
-        h1.setWidth("max-content");
+        myName.setText("Егор Гаврилов");
+        myName.setWidth("max-content");
     }
 
     private void setProfession() {
-        h2.setText("Java Developer");
-        h2.setWidth("max-content");
+        profession.setText("Java Developer");
+        profession.setWidth("max-content");
     }
 
     private List<String> getSkills() {
@@ -75,22 +67,36 @@ public class HomeView extends Composite<VerticalLayout> {
     }
 
     private void setSkillsPartSettings() {
-        h3.setText("Мой стек:");
+        skillsPartHeading.setText("Мой стек:");
 
         for (String skill : getSkills()) {
             ListItem item = new ListItem(skill);
             item.setWhiteSpace(HasText.WhiteSpace.PRE_WRAP);
-            textItems.add(item);
+            skills.add(item);
         }
     }
 
     private void setLinksPartSettings() {
-        h32.setText("Ссылки:");
+        linksPartHeading.setText("Ссылки:");
 
         for (Anchor link : getLinks()) {
             ListItem item = new ListItem(link);
             item.setWhiteSpace(HasText.WhiteSpace.PRE_WRAP);
-            textItems2.add(item);
+            links.add(item);
         }
+    }
+
+    private void setupLayout() {
+        getContent().setWidthFull();
+        getContent().setMinHeight("100vh");
+        getContent().setJustifyContentMode(JustifyContentMode.CENTER);
+        getContent().setAlignItems(Alignment.CENTER);
+
+        content.setMaxWidth("800px");
+        content.setAlignItems(Alignment.CENTER);
+
+        content2.add(skillsPartHeading, skills, linksPartHeading, links, fidoNetPart);
+        content.add(myName, profession, content2);
+        getContent().add(content);
     }
 }
