@@ -16,7 +16,6 @@ spec:
       containers:
         - name: vaadin-home
           image: gavrilovegor519/vaadin-home:latest
-          imagePullPolicy: Never
           ports:
             - containerPort: 8080
           resources:
@@ -34,7 +33,7 @@ spec:
     app: vaadin-home
   ports:
     - protocol: TCP
-      port: 8000 # The port to expose to the outside
+      port: 8080 # The port to expose to the outside
       targetPort: 8080 # The port the application is running on in the pods
   type: LoadBalancer
   sessionAffinity: ClientIP
